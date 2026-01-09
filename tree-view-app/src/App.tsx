@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import TreeView from './components/TreeView/TreeView';
 import KanbanBoard from './components/Kanban/KanbanBoard';
 import './App.css';
