@@ -1,5 +1,3 @@
-// src/components/Kanban/KanbanBoard.tsx
-
 import React, { useState } from 'react';
 import type { Column, Card } from '../../types/kanban';
 import { KanbanHelpers } from '../../utils/kanbanHelpers';
@@ -7,9 +5,14 @@ import ColumnComponent from './Column';
 import './Kanban.css';
 
 const KanbanBoard: React.FC = () => {
-  const [columns, setColumns] = useState<Column[]>(KanbanHelpers.getInitialData());
+  const [columns, setColumns] = useState<Column[]>(
+    KanbanHelpers.getInitialData()
+  );
   const [draggedCard, setDraggedCard] = useState<Card | null>(null);
-  const [dragOverColumn, setDragOverColumn] = useState<string | null>(null);
+
+  // ------------------------
+  // Card Actions
+  // ------------------------
 
   const handleAddCard = (columnId: string, title: string) => {
     const column = KanbanHelpers.findColumn(columns, columnId);
@@ -21,81 +24,83 @@ const KanbanBoard: React.FC = () => {
       column.cards.length
     );
 
-    setColumns(prevColumns =>
-      KanbanHelpers.addCard(prevColumns, columnId, newCard)
+    setColumns(prev =>
+      KanbanHelpers.addCard(prev, columnId, newCard)
     );
   };
 
   const handleEditCard = (cardId: string, newTitle: string) => {
-    setColumns(prevColumns =>
-      KanbanHelpers.updateCard(prevColumns, cardId, { title: newTitle })
+    setColumns(prev =>
+      KanbanHelpers.updateCard(prev, cardId, { title: newTitle })
     );
   };
 
   const handleDeleteCard = (cardId: string) => {
-    setColumns(prevColumns =>
-      KanbanHelpers.deleteCard(prevColumns, cardId)
+    setColumns(prev =>
+      KanbanHelpers.deleteCard(prev, cardId)
     );
   };
+
+  // ------------------------
+  // Drag & Drop
+  // ------------------------
 
   const handleDragStart = (card: Card) => {
     setDraggedCard(card);
   };
 
-  const handleDragOver = (e: React.DragEvent, columnId: string) => {
-    e.preventDefault();
-    setDragOverColumn(columnId);
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault(); // required for drop
   };
 
   const handleDrop = (e: React.DragEvent, targetColumnId: string) => {
     e.preventDefault();
-
     if (!draggedCard) return;
 
-    const sourceColumnId = draggedCard.columnId;
     const targetColumn = KanbanHelpers.findColumn(columns, targetColumnId);
-
     if (!targetColumn) return;
 
-    // Calculate drop position
-    const targetIndex = targetColumn.cards.length;
-
-    // Move the card
-    setColumns(prevColumns =>
+    setColumns(prev =>
       KanbanHelpers.moveCard(
-        prevColumns,
+        prev,
         draggedCard.id,
-        sourceColumnId,
+        draggedCard.columnId,
         targetColumnId,
-        targetIndex
+        targetColumn.cards.length
       )
     );
 
-    handleDragEnd();
+    setDraggedCard(null);
   };
 
   const handleDragEnd = () => {
     setDraggedCard(null);
-    setDragOverColumn(null);
   };
 
-  const getTotalCards = () => {
-    return columns.reduce((total, column) => total + column.cards.length, 0);
-  };
+  // ------------------------
+  // Helpers
+  // ------------------------
+
+  const getTotalCards = () =>
+    columns.reduce((total, column) => total + column.cards.length, 0);
+
+  // ------------------------
+  // Render
+  // ------------------------
 
   return (
     <div className="kanban-board-container">
+      {/* Header */}
       <div className="kanban-header">
         <h1 className="kanban-title">Kanban Board</h1>
-        <div className="kanban-stats">
-          <span className="stat-badge">
-            📊 Total Cards: <strong>{getTotalCards()}</strong>
-          </span>
-        </div>
+        <span className="stat-badge">
+          📊 Total Cards: <strong>{getTotalCards()}</strong>
+        </span>
       </div>
 
+      {/* Board */}
       <div className="kanban-board">
-        {columns.map((column) => (
+        {columns.map(column => (
           <ColumnComponent
             key={column.id}
             column={column}
@@ -110,6 +115,7 @@ const KanbanBoard: React.FC = () => {
         ))}
       </div>
 
+      {/* Footer */}
       <div className="kanban-footer">
         <div className="features-info">
           <h3>✨ Features</h3>

@@ -86,7 +86,7 @@ const TreeView: React.FC = () => {
     setDraggedNodeId(nodeId);
   };
 
-  const handleDragOver = (e: React.DragEvent, nodeId: string) => {
+  const handleDragOver = (e: React.DragEvent, _nodeId: string) => {
     e.preventDefault();
   };
 
