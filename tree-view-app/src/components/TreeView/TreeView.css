@@ -1,0 +1,261 @@
+/* src/components/TreeView/TreeView.css */
+
+.tree-view-container {
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tree-view-title {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.tree-view-content {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Tree Node Styles */
+.tree-node-wrapper {
+  margin-bottom: 4px;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: #f8f9fa;
+  margin-bottom: 4px;
+  border-radius: 6px;
+  cursor: move;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.tree-node:hover {
+  background-color: #e9ecef;
+  border-color: #ced4da;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tree-node:active {
+  cursor: grabbing;
+}
+
+/* Toggle Button */
+.toggle-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 8px;
+  padding: 4px 8px;
+  transition: transform 0.2s ease;
+  color: #495057;
+}
+
+.toggle-button:hover {
+  transform: scale(1.2);
+  color: #007bff;
+}
+
+.spacer {
+  width: 32px;
+  display: inline-block;
+}
+
+/* Node Name */
+.node-name {
+  flex: 1;
+  cursor: text;
+  padding: 4px 8px;
+  user-select: none;
+  color: #212529;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.node-name:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  border-radius: 4px;
+}
+
+/* Edit Input */
+.edit-input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.edit-input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+.action-btn {
+  padding: 6px 10px;
+  border: 1px solid #dee2e6;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+.delete-btn:hover {
+  background-color: #fff5f5;
+  border-color: #dc3545;
+}
+
+.add-btn:hover {
+  background-color: #f0fff4;
+  border-color: #28a745;
+}
+
+.edit-btn:hover {
+  background-color: #fff9f0;
+  border-color: #ffc107;
+}
+
+/* Add Node Form */
+.add-node-form {
+  margin-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.add-input {
+  padding: 8px 12px;
+  border: 2px solid #28a745;
+  border-radius: 4px;
+  flex: 1;
+  max-width: 250px;
+  font-size: 14px;
+  outline: none;
+}
+
+.add-input:focus {
+  border-color: #218838;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.btn-primary {
+  padding: 8px 16px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #218838;
+}
+
+.btn-secondary {
+  padding: 8px 16px;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+/* Children Container */
+.children {
+  margin-top: 4px;
+}
+
+/* Features List */
+.features-list {
+  margin-top: 24px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.features-list h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #495057;
+  font-size: 18px;
+}
+
+.features-list ul {
+  margin: 0;
+  padding-left: 24px;
+  line-height: 1.8;
+}
+
+.features-list li {
+  color: #212529;
+  font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tree-view-container {
+    padding: 12px;
+  }
+
+  .tree-view-title {
+    font-size: 24px;
+  }
+
+  .tree-node {
+    padding: 6px 8px;
+  }
+
+  .action-buttons {
+    gap: 4px;
+  }
+
+  .action-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
